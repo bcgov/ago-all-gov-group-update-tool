@@ -1,10 +1,8 @@
 node('imf2public') {
-    try{
+    try {
         parameters {
             string(name: 'APPSERVER', defaultValue: 'ALPHERATZ')
             }
-
-       
 
         withEnv(["GIT_SSL_NO_VERIFY=true",
                  "PYTHONPATH=E:\\sw_nt\\ArcGIS\\Pro2\\bin\\Python\\envs\\arcgispro-py3\\",
@@ -17,8 +15,6 @@ node('imf2public') {
 		}
 
 		stage("Copy Configs to the ${env.ENV} Server and run script to push data to ArcGIS Online") {
-		          
-              
                 timeout(time: 20, unit: 'MINUTES') {
                      bat '''
                     set TEMP=%WORKSPACE%
@@ -26,11 +22,9 @@ node('imf2public') {
                     
                     %PYTHONPATH%python.exe ago-group-update.py -user %agouser% -pwd %agopassword% -group %group%
                 '''
-                }
-            
-               
+            }
         }
-       } 
+    } 
     
     } catch (e) {
         currentBuild.result = "FAILED"
@@ -44,6 +38,6 @@ def notifyFailed() {
         subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
         body: """<html><body><p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
             <p>Check console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p></html></body>""",
-        to: 'darren.boss@gov.bc.ca'
+        to: 'datamaps@gov.bc.ca'
     )
 }
