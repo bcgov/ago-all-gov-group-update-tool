@@ -5,7 +5,7 @@ node('imf2public') {
             }
 
         withEnv(["GIT_SSL_NO_VERIFY=true",
-                 "PYTHONPATH=${env.PYTHON_AGS_3}",
+                 "PYTHONPATH=${env.PYTHON_AGS_3}/",
                  "WRKSPC=E:/sw_nt/jenkins/workspace/waops/ago_all_gov_group_update_tool/",
 				 ]) {
 
