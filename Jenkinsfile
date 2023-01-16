@@ -1,7 +1,7 @@
 node('imf2public') {
     try {
         parameters {
-            string(name: 'APPSERVER', defaultValue: 'ALPHERG')
+            string(name: 'APPSERVER', defaultValue: 'ALPHERATZ')
             }
 
         withEnv(["GIT_SSL_NO_VERIFY=true",
