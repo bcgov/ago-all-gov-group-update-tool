@@ -16,12 +16,14 @@ node('imf2public') {
 
 		stage("Copy Configs to the ${env.ENV} Server and run script to push data to ArcGIS Online") {
                 timeout(time: 20, unit: 'MINUTES') {
-                     bat '''
-                    set TEMP=%WORKSPACE%
-                    set TMP=%TEMP%
-                    
-                    %PYTHONPATH%python.exe ago-group-update.py -user %agouser% -pwd %agopassword% -group %group%
-                '''
+                    withCredentials([usernamePassword(credentialsId: 'd9d435e2-8acb-4698-bc74-2a1729472f1a', usernameVariable: 'AGOUSERNAME', passwordVariable: 'AGOPASSWORD')]) {
+			bat '''
+			    set TEMP=%WORKSPACE%
+			    set TMP=%TEMP%
+
+			    %PYTHONPATH%python.exe ago-group-update.py -user %agouser% -pwd %AGOPASSWORD% -group %group%
+                	'''
+		    }
             }
         }
     } 
