@@ -20,6 +20,7 @@ node('imf2public') {
                     set TEMP=%WORKSPACE%
                     set TMP=%TEMP%
                     set AGOPASSWORD=jenkins.model.Jenkins.instance.getCredentials().getById("d9d435e2-8acb-4698-bc74-2a1729472f1a").getPassword()
+		    echo %AGOPASSWORD%
 		    
                     %PYTHONPATH%python.exe ago-group-update.py -user %agouser% -pwd %AGOPASSWORD% -group %group%
                 '''
@@ -34,11 +35,11 @@ node('imf2public') {
     }
 }
 
-def notifyFailed() {
-    emailext (
-        subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-        body: """<html><body><p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-            <p>Check console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p></html></body>""",
-        to: 'datamaps@gov.bc.ca'
-    )
-}
+// def notifyFailed() {
+//     emailext (
+//         subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+//         body: """<html><body><p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+//             <p>Check console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p></html></body>""",
+//         to: 'datamaps@gov.bc.ca'
+//     )
+// }
