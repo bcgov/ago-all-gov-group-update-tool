@@ -19,8 +19,9 @@ node('imf2public') {
                      bat '''
                     set TEMP=%WORKSPACE%
                     set TMP=%TEMP%
-                    
-                    %PYTHONPATH%python.exe ago-group-update.py -user %agouser% -pwd %agopassword% -group %group%
+                    set AGOPASSWORD=jenkins.model.Jenkins.instance.getCredentials().getById("d9d435e2-8acb-4698-bc74-2a1729472f1a").getPassword()
+		    
+                    %PYTHONPATH%python.exe ago-group-update.py -user %agouser% -pwd %AGOPASSWORD% -group %group%
                 '''
             }
         }
