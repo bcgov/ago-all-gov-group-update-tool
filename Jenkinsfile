@@ -1,4 +1,4 @@
-node('imf2public') {
+node('imf2secure') {
     try {
         parameters {
             string(name: 'APPSERVER', defaultValue: 'ALPHERG')
